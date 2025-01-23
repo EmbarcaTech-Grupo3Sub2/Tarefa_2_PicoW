@@ -114,7 +114,7 @@ void action(char key, PIO pio, uint sm) {
             /* code for key 3 */
             break;
         case 'A':
-            /* code for key A */
+            desligaTodos(pio,sm);
             break;
         case '4':
             /* code for key 4 */
@@ -126,7 +126,7 @@ void action(char key, PIO pio, uint sm) {
             /* code for key 6 */
             break;
         case 'B':
-            /* code for key B */
+            putBlue(pio, sm);
             break;
         case '7':
             /* code for key 7 */
@@ -138,7 +138,7 @@ void action(char key, PIO pio, uint sm) {
             /* code for key 9 */
             break;
         case 'C':
-            /* code for key C */
+            putRed80(pio, sm);
             break;
         case '*':
             modelo_animacao(pio, sm);
@@ -147,10 +147,10 @@ void action(char key, PIO pio, uint sm) {
             /* code for key 0 */
             break;
         case '#':
-            /* code for key # */
+            putWhite20(pio,sm);
             break;
         case 'D':
-            /* code for key D */
+            putGreen50(pio, sm);
             break;
         default:
             /* code for unknown key */
@@ -158,12 +158,76 @@ void action(char key, PIO pio, uint sm) {
     }
 }
 
+void desligaTodos(PIO pio, uint sm){
+    Matriz_leds_config off = {
+    //       Coluna 0          Coluna 1          Coluna 2          Coluna 3          Coluna 4
+    //R    G    B       R    G    B       R    G    B       R    G    B       R    G    B
+    {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}}, // Linha 0
+    {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}}, // Linha 1
+    {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}}, // Linha 2
+    {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}}, // Linha 3
+    {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}}  // Linha 4
+    };
+    imprimir_desenho(off, pio, sm);
+}
+
+void putBlue(PIO pio, uint sm){
+    Matriz_leds_config blue = {
+    //       Coluna 0          Coluna 1          Coluna 2          Coluna 3          Coluna 4
+    //R    G    B       R    G    B       R    G    B       R    G    B       R    G    B
+    {{0.0, 0.0, 1.0}, {0.0, 0.0, 1.0}, {0.0, 0.0, 1.0}, {0.0, 0.0, 1.0}, {0.0, 0.0, 1.0}}, // Linha 0
+    {{0.0, 0.0, 1.0}, {0.0, 0.0, 1.0}, {0.0, 0.0, 1.0}, {0.0, 0.0, 1.0}, {0.0, 0.0, 1.0}}, // Linha 1
+    {{0.0, 0.0, 1.0}, {0.0, 0.0, 1.0}, {0.0, 0.0, 1.0}, {0.0, 0.0, 1.0}, {0.0, 0.0, 1.0}}, // Linha 2
+    {{0.0, 0.0, 1.0}, {0.0, 0.0, 1.0}, {0.0, 0.0, 1.0}, {0.0, 0.0, 1.0}, {0.0, 0.0, 1.0}}, // Linha 3
+    {{0.0, 0.0, 1.0}, {0.0, 0.0, 1.0}, {0.0, 0.0, 1.0}, {0.0, 0.0, 1.0}, {0.0, 0.0, 1.0}}  // Linha 4
+    };
+    imprimir_desenho(blue, pio, sm);
+}
+
+void putRed80(PIO pio, uint sm){
+    Matriz_leds_config red = {
+    //       Coluna 0          Coluna 1          Coluna 2          Coluna 3          Coluna 4
+    //R    G    B       R    G    B       R    G    B       R    G    B       R    G    B
+    {{0.8, 0.0, 0.0}, {0.8, 0.0, 0.0}, {0.8, 0.0, 0.0}, {0.8, 0.0, 0.0}, {0.8, 0.0, 0.0}}, // Linha 0
+    {{0.8, 0.0, 0.0}, {0.8, 0.0, 0.0}, {0.8, 0.0, 0.0}, {0.8, 0.0, 0.0}, {0.8, 0.0, 0.0}}, // Linha 1
+    {{0.8, 0.0, 0.0}, {0.8, 0.0, 0.0}, {0.8, 0.0, 0.0}, {0.8, 0.0, 0.0}, {0.8, 0.0, 0.0}}, // Linha 2
+    {{0.8, 0.0, 0.0}, {0.8, 0.0, 0.0}, {0.8, 0.0, 0.0}, {0.8, 0.0, 0.0}, {0.8, 0.0, 0.0}}, // Linha 3
+    {{0.8, 0.0, 0.0}, {0.8, 0.0, 0.0}, {0.8, 0.0, 0.0}, {0.8, 0.0, 0.0}, {0.8, 0.0, 0.0}}  // Linha 4
+    };
+    imprimir_desenho(red, pio, sm);
+}
+
+void putGreen50(PIO pio, uint sm){
+    Matriz_leds_config green = { 
+    //       Coluna 0          Coluna 1          Coluna 2          Coluna 3          Coluna 4
+    //R    G    B       R    G    B       R    G    B       R    G    B       R    G    B
+    {{0.0, 0.5, 0.0}, {0.0, 0.5, 0.0}, {0.0, 0.5, 0.0}, {0.0, 0.5, 0.0}, {0.0, 0.5, 0.0}}, // Linha 0
+    {{0.0, 0.5, 0.0}, {0.0, 0.5, 0.0}, {0.0, 0.5, 0.0}, {0.0, 0.5, 0.0}, {0.0, 0.5, 0.0}}, // Linha 1
+    {{0.0, 0.5, 0.0}, {0.0, 0.5, 0.0}, {0.0, 0.5, 0.0}, {0.0, 0.5, 0.0}, {0.0, 0.5, 0.0}}, // Linha 2
+    {{0.0, 0.5, 0.0}, {0.0, 0.5, 0.0}, {0.0, 0.5, 0.0}, {0.0, 0.5, 0.0}, {0.0, 0.5, 0.0}}, // Linha 3
+    {{0.0, 0.5, 0.0}, {0.0, 0.5, 0.0}, {0.0, 0.5, 0.0}, {0.0, 0.5, 0.0}, {0.0, 0.5, 0.0}}  // Linha 4
+    };
+    imprimir_desenho(green, pio, sm);
+}
+
+void putWhite20(PIO pio, uint sm){
+    Matriz_leds_config white = { 
+    //       Coluna 0          Coluna 1          Coluna 2          Coluna 3          Coluna 4
+    //R    G    B       R    G    B       R    G    B       R    G    B       R    G    B
+    {{0.2, 0.2, 0.2}, {0.2, 0.2, 0.2}, {0.2, 0.2, 0.2}, {0.2, 0.2, 0.2}, {0.2, 0.2, 0.2}}, // Linha 0
+    {{0.2, 0.2, 0.2}, {0.2, 0.2, 0.2}, {0.2, 0.2, 0.2}, {0.2, 0.2, 0.2}, {0.2, 0.2, 0.2}}, // Linha 1
+    {{0.2, 0.2, 0.2}, {0.2, 0.2, 0.2}, {0.2, 0.2, 0.2}, {0.2, 0.2, 0.2}, {0.2, 0.2, 0.2}}, // Linha 2
+    {{0.2, 0.2, 0.2}, {0.2, 0.2, 0.2}, {0.2, 0.2, 0.2}, {0.2, 0.2, 0.2}, {0.2, 0.2, 0.2}}, // Linha 3
+    {{0.2, 0.2, 0.2}, {0.2, 0.2, 0.2}, {0.2, 0.2, 0.2}, {0.2, 0.2, 0.2}, {0.2, 0.2, 0.2}}  // Linha 4
+    };
+    imprimir_desenho(white, pio, sm);
+}
+
 int main()
 {
     //inicialização da matriz de leds;
     PIO pio = pio0;
     uint sm = configurar_matriz(pio);
-    
 
     stdio_init_all();
     setup_pins();
