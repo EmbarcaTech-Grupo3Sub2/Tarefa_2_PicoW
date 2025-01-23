@@ -16,9 +16,6 @@ const char keysFlatMap[16] = {
 
 void setup_pins()
 {
-    //inicialização da matriz de leds
-    PIO pio = pio0;
-    uint sm = configurar_matriz(pio);
 
     for (int i = 0; i < 4; i++)
     {
@@ -61,16 +58,119 @@ char get_key()
     else
         return ' ';
 }
+//funcao modelo para fazer as animações na matriz de leds
+void modelo_animacao(PIO pio, uint sm){
+    //organização dos frames
+    Matriz_leds_config frame1 = {
+    //       Coluna 0          Coluna 1          Coluna 2          Coluna 3          Coluna 4
+    //R    G    B       R    G    B       R    G    B       R    G    B       R    G    B
+    {{0.0, 0.0, 1.0}, {1.0, 0.0, 0.0}, {0.0, 1.0, 0.0}, {0.0, 0.0, 1.0}, {1.0, 0.0, 0.0}}, // Linha 0
+    {{0.0, 1.0, 0.0}, {1.0, 0.0, 0.0}, {0.0, 0.0, 1.0}, {0.0, 1.0, 0.0}, {1.0, 0.0, 0.0}}, // Linha 1
+    {{0.0, 0.0, 1.0}, {1.0, 0.0, 0.0}, {0.0, 1.0, 0.0}, {0.0, 0.0, 1.0}, {0.0, 1.0, 0.0}}, // Linha 2
+    {{0.0, 0.0, 1.0}, {1.0, 0.0, 0.0}, {0.0, 0.0, 1.0}, {0.0, 0.0, 1.0}, {1.0, 0.0, 0.0}}, // Linha 3
+    {{0.0, 1.0, 0.0}, {1.0, 0.0, 0.0}, {0.0, 0.0, 1.0}, {0.0, 1.0, 0.0}, {1.0, 0.0, 0.0}}};// Linha 4
 
+    Matriz_leds_config frame2 = {
+        //       Coluna 0          Coluna 1          Coluna 2          Coluna 3          Coluna 4
+        //R    G    B       R    G    B       R    G    B       R    G    B       R    G    B
+        {{0.5, 0.2, 0.8}, {0.9, 0.1, 0.3}, {0.1, 0.8, 0.4}, {0.3, 0.7, 0.2}, {0.6, 0.4, 0.9}}, // Linha 0
+        {{0.7, 0.3, 0.1}, {0.5, 0.6, 0.2}, {0.4, 0.2, 0.9}, {0.1, 0.3, 0.8}, {0.9, 0.5, 0.1}}, // Linha 1
+        {{0.2, 0.4, 0.6}, {0.8, 0.2, 0.7}, {0.3, 0.9, 0.1}, {0.6, 0.1, 0.5}, {0.7, 0.3, 0.2}}, // Linha 2
+        {{0.4, 0.1, 0.3}, {0.7, 0.6, 0.8}, {0.2, 0.5, 0.4}, {0.8, 0.3, 0.7}, {0.5, 0.9, 0.1}}, // Linha 3
+        {{0.3, 0.8, 0.5}, {0.2, 0.7, 0.4}, {0.9, 0.1, 0.6}, {0.5, 0.2, 0.3}, {0.1, 0.4, 0.7}}  // Linha 4
+        };
+
+    Matriz_leds_config off = {
+    //       Coluna 0          Coluna 1          Coluna 2          Coluna 3          Coluna 4
+    //R    G    B       R    G    B       R    G    B       R    G    B       R    G    B
+    {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}}, // Linha 0
+    {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}}, // Linha 1
+    {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}}, // Linha 2
+    {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}}, // Linha 3
+    {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}}  // Linha 4
+};
+
+    //iteração dos frames
+    for(int i = 0; i<5; i++){
+        imprimir_desenho(frame1, pio, sm);
+        sleep_ms(100);
+        imprimir_desenho(frame2, pio, sm);
+        sleep_ms(100);
+    }
+    imprimir_desenho(off, pio, sm);
+    
+}
+
+//função responsável por adicionar ação a cada tecla
+void action(char key, PIO pio, uint sm) {
+    switch (key) {
+        case '1':
+            /* code for key 1 */
+            break;
+        case '2':
+            /* code for key 2 */
+            break;
+        case '3':
+            /* code for key 3 */
+            break;
+        case 'A':
+            /* code for key A */
+            break;
+        case '4':
+            /* code for key 4 */
+            break;
+        case '5':
+            /* code for key 5 */
+            break;
+        case '6':
+            /* code for key 6 */
+            break;
+        case 'B':
+            /* code for key B */
+            break;
+        case '7':
+            /* code for key 7 */
+            break;
+        case '8':
+            /* code for key 8 */
+            break;
+        case '9':
+            /* code for key 9 */
+            break;
+        case 'C':
+            /* code for key C */
+            break;
+        case '*':
+            modelo_animacao(pio, sm);
+            break;
+        case '0':
+            /* code for key 0 */
+            break;
+        case '#':
+            /* code for key # */
+            break;
+        case 'D':
+            /* code for key D */
+            break;
+        default:
+            /* code for unknown key */
+            break;
+    }
+}
 
 int main()
 {
+    //inicialização da matriz de leds;
+    PIO pio = pio0;
+    uint sm = configurar_matriz(pio);
+    
+
     stdio_init_all();
     setup_pins();
 
     while (true)
     {
-        get_key();
+        action(get_key(), pio, sm);
     }
 
     return 0;
