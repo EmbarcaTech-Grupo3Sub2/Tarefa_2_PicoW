@@ -1,4 +1,6 @@
 #include "pico/stdlib.h"
+#include "hardware/pio.h"
+#include "matriz_leds.h"
 #include <stdio.h>
 
 
@@ -14,6 +16,9 @@ const char keysFlatMap[16] = {
 
 void setup_pins()
 {
+    //inicialização da matriz de leds
+    PIO pio = pio0;
+    uint sm = configurar_matriz(pio);
 
     for (int i = 0; i < 4; i++)
     {

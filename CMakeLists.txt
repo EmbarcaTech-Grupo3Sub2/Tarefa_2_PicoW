@@ -35,11 +35,15 @@ pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
 
-add_executable(Tarefa_2_PicoW Tarefa_2_PicoW.c )
+add_executable(Tarefa_2_PicoW Tarefa_2_PicoW.c matriz_leds.c )
 
 pico_set_program_name(Tarefa_2_PicoW "Tarefa_2_PicoW")
 pico_set_program_version(Tarefa_2_PicoW "0.1")
 
+# Generate PIO header
+pico_generate_pio_header(${CMAKE_PROJECT_NAME} ${CMAKE_CURRENT_LIST_DIR}/pio_matrix.pio)
+
+target_sources(${CMAKE_PROJECT_NAME} PRIVATE Tarefa_2_PicoW.c)
 # Modify the below lines to enable/disable output over UART/USB
 pico_enable_stdio_uart(Tarefa_2_PicoW 1)
 pico_enable_stdio_usb(Tarefa_2_PicoW 0)
@@ -55,8 +59,9 @@ target_include_directories(Tarefa_2_PicoW PRIVATE
 
 # Add any user requested libraries
 target_link_libraries(Tarefa_2_PicoW 
+        hardware_pio
+        hardware_clocks
         
         )
 
 pico_add_extra_outputs(Tarefa_2_PicoW)
-
