@@ -709,11 +709,11 @@ void cobrinhaAnimation(PIO pio, uint sm)
             // Verificar se a cabeça encosta na comida
             if (x == comida[0] && y == comida[1])
             {
+                comeu = true;
                 do
                 {
                     comida[0] = rand() % 5;
                     comida[1] = rand() % 5;
-                    comeu = true;
                 } while ((comida[0] == cobrinha[0][0] && comida[1] == cobrinha[0][1]) ||
                          (comida[0] == cobrinha[1][0] && comida[1] == cobrinha[1][1]) ||
                          (comida[0] == cobrinha[2][0] && comida[1] == cobrinha[2][1]) ||
@@ -743,15 +743,24 @@ void cobrinhaAnimation(PIO pio, uint sm)
             // Marcar a posição da cobrinha no frame
             for (int j = 0; j < 4; j++)
             {
-                if (j == 3)
+                switch (j)
                 {
-                    frame[cobrinha[j][0]][cobrinha[j][1]].red = 1.0;
-                    frame[cobrinha[j][0]][cobrinha[j][1]].green = 0.6;
-                }
-                else
-                {
-                    frame[cobrinha[j][0]][cobrinha[j][1]].red = 0.3;
+                case 0:
+                    frame[cobrinha[j][0]][cobrinha[j][1]].red = 0.1;
+                    frame[cobrinha[j][0]][cobrinha[j][1]].green = 0.1;
+                    break;
+                case 1:
+                    frame[cobrinha[j][0]][cobrinha[j][1]].red = 0.2;
+                    frame[cobrinha[j][0]][cobrinha[j][1]].green = 0.1;
+                    break;
+                case 2:
+                    frame[cobrinha[j][0]][cobrinha[j][1]].red = 0.2;
+                    frame[cobrinha[j][0]][cobrinha[j][1]].green = 0.1;
+                    break;
+                case 3:
+                    frame[cobrinha[j][0]][cobrinha[j][1]].red = 0.7;
                     frame[cobrinha[j][0]][cobrinha[j][1]].green = 0.2;
+                    break;
                 }
             }
 
@@ -762,25 +771,21 @@ void cobrinhaAnimation(PIO pio, uint sm)
 
             // Enviar frame para o display
             imprimir_desenho(frame, pio, sm);
-
-            if (comeu)
+            sleep_ms(75);
+        }
+        if (comeu)
+        {
+            for (int i = 0; i < 1000; i++)
             {
-                // Tocar o buzzer
-                for (int i = 0; i < 3000; i++)
-                {
-                    gpio_put(21, 1);
-                    sleep_us(5);
-                    gpio_put(21, 0);
-                    sleep_us(5);
-                }
-            }
-            else
-            {
-                sleep_ms(100);
+                gpio_put(21, 1);
+                sleep_us(5);
+                gpio_put(21, 0);
+                sleep_us(5);
             }
         }
     }
 
+    gpio_put(21, 0);
     Matriz_leds_config off = {
         {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}}, // Linha 0
         {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}}, // Linha 1
@@ -799,6 +804,8 @@ int main()
 
     stdio_init_all();
     setup_pins();
+
+    action('6', pio, sm);
 
     while (true)
     {
