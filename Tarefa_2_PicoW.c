@@ -16,9 +16,6 @@ const char keysFlatMap[16] = {
 
 void setup_pins()
 {
-    gpio_init(21); // buzzer
-    gpio_set_dir(21, GPIO_OUT);
-
     for (int i = 0; i < 4; i++)
     {
         gpio_init(rw[i]);
@@ -668,18 +665,6 @@ void cobrinhaAnimation(PIO pio, uint sm)
     bool comeu = false;
     for (int i = 0; i < 500; i++)
     {
-        if (comeu)
-        {
-            // gpio_put(21, 1);
-            // sleep_us(5);
-            // gpio_put(21, 0);
-            // sleep_us(5);
-            // gpio_put(21, 1);
-            // sleep_us(5);
-            // gpio_put(21, 0);
-            // sleep_us(5);
-            comeu = false;
-        }
         // Alterar direção aleatoriamente com 30% de chance
         int novaDirecao;
         do
@@ -784,6 +769,18 @@ void cobrinhaAnimation(PIO pio, uint sm)
             imprimir_desenho(frame, pio, sm);
             sleep_ms(75);
         }
+        if (comeu)
+        {
+            Matriz_leds_config frame = {
+                {{0.1, 0.0, 0.0}, {0.1, 0.0, 0.0}, {0.1, 0.0, 0.0}, {0.1, 0.0, 0.0}, {0.1, 0.0, 0.0}},
+                {{0.1, 0.0, 0.0}, {0.1, 0.0, 0.0}, {0.1, 0.0, 0.0}, {0.1, 0.0, 0.0}, {0.1, 0.0, 0.0}},
+                {{0.1, 0.0, 0.0}, {0.1, 0.0, 0.0}, {0.1, 0.0, 0.0}, {0.1, 0.0, 0.0}, {0.1, 0.0, 0.0}},
+                {{0.1, 0.0, 0.0}, {0.1, 0.0, 0.0}, {0.1, 0.0, 0.0}, {0.1, 0.0, 0.0}, {0.1, 0.0, 0.0}},
+                {{0.1, 0.0, 0.0}, {0.1, 0.0, 0.0}, {0.1, 0.0, 0.0}, {0.1, 0.0, 0.0}, {0.1, 0.0, 0.0}}};
+            imprimir_desenho(frame, pio, sm);
+            sleep_ms(75);
+            comeu = false;
+        }
     }
 
     Matriz_leds_config off = {
@@ -806,7 +803,6 @@ int main()
     setup_pins();
 
     action('6', pio, sm);
-
     while (true)
     {
         action(get_key(), pio, sm);
