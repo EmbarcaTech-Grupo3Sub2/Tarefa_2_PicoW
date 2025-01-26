@@ -767,7 +767,7 @@ void cobrinhaAnimation(PIO pio, uint sm)
 
             // Enviar frame para o display
             imprimir_desenho(frame, pio, sm);
-            sleep_ms(75);
+            sleep_ms(80);
         }
         if (comeu)
         {
