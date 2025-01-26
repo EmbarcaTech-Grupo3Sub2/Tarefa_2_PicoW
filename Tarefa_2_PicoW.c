@@ -674,7 +674,7 @@ void cobrinhaAnimation(PIO pio, uint sm)
                  (direcao == 1 && novaDirecao == 0) ||
                  (direcao == 2 && novaDirecao == 3) ||
                  (direcao == 3 && novaDirecao == 2)); // Evitar direção oposta direta
-        if (rand() % 100 < 30)
+        if (rand() % 100 < 40)
         {
             direcao = novaDirecao;
         }
@@ -778,7 +778,7 @@ void cobrinhaAnimation(PIO pio, uint sm)
                 {{0.1, 0.0, 0.0}, {0.1, 0.0, 0.0}, {0.1, 0.0, 0.0}, {0.1, 0.0, 0.0}, {0.1, 0.0, 0.0}},
                 {{0.1, 0.0, 0.0}, {0.1, 0.0, 0.0}, {0.1, 0.0, 0.0}, {0.1, 0.0, 0.0}, {0.1, 0.0, 0.0}}};
             imprimir_desenho(frame, pio, sm);
-            sleep_ms(75);
+            sleep_ms(200);
             comeu = false;
         }
     }
