@@ -776,7 +776,7 @@ void cobrinhaAnimation(PIO pio, uint sm)
             }
             else
             {
-                sleep_ms(150);
+                sleep_ms(100);
             }
         }
     }
