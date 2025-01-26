@@ -2,6 +2,7 @@
 #include "hardware/pio.h"
 #include "matriz_leds.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 #define timeSeta 100
 const uint col[4] = {19, 18, 17, 16}; // Definição dos pinos do teclado
@@ -100,7 +101,7 @@ void action(char key, PIO pio, uint sm)
         putRed80(pio, sm);
         break;
     case '*':
-        modelo_animacao(pio, sm);
+        // optional animation
         break;
     case '0':
         setaGirando(pio, sm);
@@ -820,7 +821,7 @@ void animacao5(PIO pio, uint sm){
     }
     sleep_ms(200);
     // Apaga todos os LEDs após a animação
-    imprimir_desenho(&off, pio, sm);
+    imprimir_desenho(off, pio, sm);
 }
 
 void quadriculado(PIO pio, uint sm){
@@ -1075,7 +1076,7 @@ void animation3(PIO pio, uint sm) {
        imprimir_desenho(frames[i%7], pio, sm);
        sleep_ms(100);
    }
-  sleep_ms(100);
+   sleep_ms(100);
    imprimir_desenho(off, pio, sm);
 }
 
