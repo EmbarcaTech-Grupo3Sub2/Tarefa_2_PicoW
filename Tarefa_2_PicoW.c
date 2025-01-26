@@ -668,7 +668,18 @@ void cobrinhaAnimation(PIO pio, uint sm)
     bool comeu = false;
     for (int i = 0; i < 500; i++)
     {
-        comeu = false;
+        if (comeu)
+        {
+            // gpio_put(21, 1);
+            // sleep_us(5);
+            // gpio_put(21, 0);
+            // sleep_us(5);
+            // gpio_put(21, 1);
+            // sleep_us(5);
+            // gpio_put(21, 0);
+            // sleep_us(5);
+            comeu = false;
+        }
         // Alterar direção aleatoriamente com 30% de chance
         int novaDirecao;
         do
@@ -759,7 +770,7 @@ void cobrinhaAnimation(PIO pio, uint sm)
                     break;
                 case 3:
                     frame[cobrinha[j][0]][cobrinha[j][1]].red = 0.7;
-                    frame[cobrinha[j][0]][cobrinha[j][1]].green = 0.2;
+                    frame[cobrinha[j][0]][cobrinha[j][1]].green = 0.1;
                     break;
                 }
             }
@@ -773,19 +784,8 @@ void cobrinhaAnimation(PIO pio, uint sm)
             imprimir_desenho(frame, pio, sm);
             sleep_ms(75);
         }
-        if (comeu)
-        {
-            for (int i = 0; i < 1000; i++)
-            {
-                gpio_put(21, 1);
-                sleep_us(5);
-                gpio_put(21, 0);
-                sleep_us(5);
-            }
-        }
     }
 
-    gpio_put(21, 0);
     Matriz_leds_config off = {
         {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}}, // Linha 0
         {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}}, // Linha 1
