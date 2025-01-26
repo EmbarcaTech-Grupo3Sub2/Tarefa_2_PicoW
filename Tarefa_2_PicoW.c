@@ -802,7 +802,6 @@ int main()
     stdio_init_all();
     setup_pins();
 
-    action('6', pio, sm);
     while (true)
     {
         action(get_key(), pio, sm);
