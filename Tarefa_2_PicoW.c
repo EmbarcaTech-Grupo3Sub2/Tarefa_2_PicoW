@@ -58,48 +58,6 @@ char get_key()
     else
         return ' ';
 }
-//funcao modelo para fazer as animações na matriz de leds
-void modelo_animacao(PIO pio, uint sm){
-    //organização dos frames
-    Matriz_leds_config frame1 = {
-    //       Coluna 0          Coluna 1          Coluna 2          Coluna 3          Coluna 4
-    //R    G    B       R    G    B       R    G    B       R    G    B       R    G    B
-    {{0.0, 0.0, 1.0}, {1.0, 0.0, 0.0}, {0.0, 1.0, 0.0}, {0.0, 0.0, 1.0}, {1.0, 0.0, 0.0}}, // Linha 0
-    {{0.0, 1.0, 0.0}, {1.0, 0.0, 0.0}, {0.0, 0.0, 1.0}, {0.0, 1.0, 0.0}, {1.0, 0.0, 0.0}}, // Linha 1
-    {{0.0, 0.0, 1.0}, {1.0, 0.0, 0.0}, {0.0, 1.0, 0.0}, {0.0, 0.0, 1.0}, {0.0, 1.0, 0.0}}, // Linha 2
-    {{0.0, 0.0, 1.0}, {1.0, 0.0, 0.0}, {0.0, 0.0, 1.0}, {0.0, 0.0, 1.0}, {1.0, 0.0, 0.0}}, // Linha 3
-    {{0.0, 1.0, 0.0}, {1.0, 0.0, 0.0}, {0.0, 0.0, 1.0}, {0.0, 1.0, 0.0}, {1.0, 0.0, 0.0}}};// Linha 4
-
-    Matriz_leds_config frame2 = {
-        //       Coluna 0          Coluna 1          Coluna 2          Coluna 3          Coluna 4
-        //R    G    B       R    G    B       R    G    B       R    G    B       R    G    B
-        {{0.5, 0.2, 0.8}, {0.9, 0.1, 0.3}, {0.1, 0.8, 0.4}, {0.3, 0.7, 0.2}, {0.6, 0.4, 0.9}}, // Linha 0
-        {{0.7, 0.3, 0.1}, {0.5, 0.6, 0.2}, {0.4, 0.2, 0.9}, {0.1, 0.3, 0.8}, {0.9, 0.5, 0.1}}, // Linha 1
-        {{0.2, 0.4, 0.6}, {0.8, 0.2, 0.7}, {0.3, 0.9, 0.1}, {0.6, 0.1, 0.5}, {0.7, 0.3, 0.2}}, // Linha 2
-        {{0.4, 0.1, 0.3}, {0.7, 0.6, 0.8}, {0.2, 0.5, 0.4}, {0.8, 0.3, 0.7}, {0.5, 0.9, 0.1}}, // Linha 3
-        {{0.3, 0.8, 0.5}, {0.2, 0.7, 0.4}, {0.9, 0.1, 0.6}, {0.5, 0.2, 0.3}, {0.1, 0.4, 0.7}}  // Linha 4
-        };
-
-    Matriz_leds_config off = {
-    //       Coluna 0          Coluna 1          Coluna 2          Coluna 3          Coluna 4
-    //R    G    B       R    G    B       R    G    B       R    G    B       R    G    B
-    {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}}, // Linha 0
-    {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}}, // Linha 1
-    {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}}, // Linha 2
-    {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}}, // Linha 3
-    {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}}  // Linha 4
-};
-
-    //iteração dos frames
-    for(int i = 0; i<5; i++){
-        imprimir_desenho(frame1, pio, sm);
-        sleep_ms(100);
-        imprimir_desenho(frame2, pio, sm);
-        sleep_ms(100);
-    }
-    imprimir_desenho(off, pio, sm);
-    
-}
 
 //função responsável por adicionar ação a cada tecla
 void action(char key, PIO pio, uint sm) {
@@ -462,56 +420,16 @@ void setaGirando(PIO pio, uint sm){
         {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}}, // Linha 3
         {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}}  // Linha 4
     };
-    for(int i = 0; i < 2 ; i++){
-        imprimir_desenho(frame1, pio, sm);
+
+    Matriz_leds_config *frames[] = {&frame1, &frame2, &frame3, &frame4, &frame5, &frame6, &frame7, &frame8, 
+                                    &frame9, &frame10, &frame11, &frame12, &frame13, &frame14, &frame15, 
+                                    &frame16, &frame17, &frame18, &frame19, &frame20, &frame21, &frame22, &frame23, &frame24};
+    
+    for(int i = 0; i < 24 * 2; i++){
+        imprimir_desenho(frames[i%24], pio, sm);
         sleep_ms(timeSeta);
-        imprimir_desenho(frame2, pio, sm);
-        sleep_ms(timeSeta);
-        imprimir_desenho(frame3, pio, sm);
-        sleep_ms(timeSeta);
-        imprimir_desenho(frame4, pio, sm);
-        sleep_ms(timeSeta);
-        imprimir_desenho(frame5, pio, sm);
-        sleep_ms(timeSeta);
-        imprimir_desenho(frame6, pio, sm);
-        sleep_ms(timeSeta);
-        imprimir_desenho(frame7, pio, sm);
-        sleep_ms(timeSeta);
-        imprimir_desenho(frame8, pio, sm);
-        sleep_ms(timeSeta);
-        imprimir_desenho(frame9, pio, sm);
-        sleep_ms(timeSeta);
-        imprimir_desenho(frame10, pio, sm);
-        sleep_ms(timeSeta);
-        imprimir_desenho(frame11, pio, sm);
-        sleep_ms(timeSeta);
-        imprimir_desenho(frame12, pio, sm);
-        sleep_ms(timeSeta);
-        imprimir_desenho(frame13, pio, sm);
-        sleep_ms(timeSeta);
-        imprimir_desenho(frame14, pio, sm);
-        sleep_ms(timeSeta);
-        imprimir_desenho(frame15, pio, sm);
-        sleep_ms(timeSeta);
-        imprimir_desenho(frame16, pio, sm);
-        sleep_ms(timeSeta);
-        imprimir_desenho(frame17, pio, sm);
-        sleep_ms(timeSeta);
-        imprimir_desenho(frame18, pio, sm);
-        sleep_ms(timeSeta);
-        imprimir_desenho(frame19, pio, sm);
-        sleep_ms(timeSeta);
-        imprimir_desenho(frame20, pio, sm);
-        sleep_ms(timeSeta);
-        imprimir_desenho(frame21, pio, sm);
-        sleep_ms(timeSeta);
-        imprimir_desenho(frame22, pio, sm);
-        sleep_ms(timeSeta);
-        imprimir_desenho(frame23, pio, sm);
-        sleep_ms(timeSeta);
-        imprimir_desenho(frame24, pio, sm);
     }
-    sleep_ms(10);
+    sleep_ms(timeSeta);
     imprimir_desenho(off, pio, sm);   
 }
 
@@ -639,11 +557,11 @@ void animation2(PIO pio, uint sm){
 
     Matriz_leds_config *frames[] = {&frame1, &frame2, &frame3, &frame4, &frame5, &frame6, &frame7, &frame8, &frame9, &frame10, &frame11};
 
-    for(int i = 0; i < 11*10; i++){
+    for(int i = 0; i < 11*3; i++){
         imprimir_desenho(frames[i%11], pio, sm);
-        sleep_ms(50);
+        sleep_ms(timeSeta);
     }
-    sleep_ms(50);
+    sleep_ms(timeSeta);
     imprimir_desenho(off, pio, sm);
 }
 
@@ -889,11 +807,11 @@ void animacao5(PIO pio, uint sm){
     };
 
     // Loop para exibir os frames sequencialmente
-    for(int i = 0; i < 10 * 10; i++){ // 10 frames repetidos 10 vezes
+    for(int i = 0; i < 10 * 4; i++){ // 10 frames repetidos 10 vezes
         imprimir_desenho(frames[i % 10], pio, sm);
         sleep_ms(200); // Tempo de pausa entre frames (ajuste conforme necessário)
     }
-
+    sleep_ms(200);
     // Apaga todos os LEDs após a animação
     imprimir_desenho(&off, pio, sm);
 }
@@ -925,14 +843,22 @@ void quadriculado(PIO pio, uint sm){
         {{0.0, 0.0, 1.0}, {0.0, 1.0, 0.0}, {0.0, 0.0, 1.0}, {0.0, 1.0, 0.0}, {0.0, 0.0, 1.0}}  // Linha 4
     };
 
+    Matriz_leds_config off = {
+       {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}},
+       {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}},
+       {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}},
+       {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}},
+       {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}}
+   };
+
     Matriz_leds_config *frames[] = {&frame1, &frame2, &frame3};
 
-    for(int i = 0; i < 50; i++){
+    for(int i = 0; i < 3*10; i++){
         imprimir_desenho(frames[i%3], pio, sm);
-        sleep_ms(500);
+        sleep_ms(200);
     }
-    sleep_ms(50);
-    imprimir_desenho(frame1, pio, sm);
+    sleep_ms(200);
+    imprimir_desenho(off, pio, sm);
 }
 
 void animation3(PIO pio, uint sm) {
@@ -1002,11 +928,11 @@ void animation3(PIO pio, uint sm) {
 
    Matriz_leds_config *frames[] = {&frame1, &frame2, &frame3, &frame4, &frame5, &frame6, &frame7};
 
-   for(int i = 0; i < 7*10; i++) {
+   for(int i = 0; i < 7*5; i++) {
        imprimir_desenho(frames[i%7], pio, sm);
-       sleep_ms(50);
+       sleep_ms(100);
    }
-   imprimir_desenho(&off, pio, sm);
+   imprimir_desenho(off, pio, sm);
 }
 
 int main()
