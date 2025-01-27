@@ -1134,10 +1134,10 @@ void animacao1(PIO pio, uint sm){
 
    for(int i = 0; i < 4*5; i++){
         imprimir_desenho(frames[i%4], pio, sm);
-        sleep_ms(1000);
+        sleep_ms(200);
     }
 
-    sleep_ms(100);
+    sleep_ms(200);
     imprimir_desenho(off, pio, sm);
 }
 
