@@ -71,16 +71,16 @@ void action(char key, PIO pio, uint sm)
         animation2(pio, sm);
         break;
     case '3':
-        /* code for key 3 */
+        animation3(pio, sm);
         break;
     case 'A':
         desligaTodos(pio, sm);
         break;
     case '4':
-        /* code for key 4 */
+        quadriculado(pio, sm);
         break;
     case '5':
-        /* code for key 5 */
+        animacao5(pio, sm);
         break;
     case '6':
         cobrinhaAnimation(pio, sm);
@@ -419,15 +419,6 @@ void setaGirando(PIO pio, uint sm)
         {{0.0, 0.0, 0.0}, {0.0, 0.0, 1.0}, {0.0, 0.0, 1.0}, {0.0, 0.0, 1.0}, {0.0, 0.0, 0.0}}, // Linha 3
         {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 1.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}}  // Linha 4
     };
-    Matriz_leds_config off = {
-        //       Coluna 0          Coluna 1          Coluna 2          Coluna 3          Coluna 4
-        // R    G    B       R    G    B       R    G    B       R    G    B       R    G    B
-        {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}}, // Linha 0
-        {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}}, // Linha 1
-        {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}}, // Linha 2
-        {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}}, // Linha 3
-        {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}}  // Linha 4
-    };
 
     Matriz_leds_config *frames[] = {&frame1, &frame2, &frame3, &frame4, &frame5, &frame6, &frame7, &frame8, 
                                     &frame9, &frame10, &frame11, &frame12, &frame13, &frame14, &frame15, 
@@ -438,7 +429,7 @@ void setaGirando(PIO pio, uint sm)
         sleep_ms(timeSeta);
     }
     sleep_ms(timeSeta);
-    imprimir_desenho(off, pio, sm);   
+    desligaTodos(pio, sm);
 }
 
 void animation2(PIO pio, uint sm)
@@ -553,16 +544,6 @@ void animation2(PIO pio, uint sm)
         {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {1.0, 0.5, 0.0}, {1.0, 0.5, 0.0}, {0.0, 0.0, 0.0}}  // Linha 4
     };
 
-    Matriz_leds_config off = {
-        //       Coluna 0          Coluna 1          Coluna 2          Coluna 3          Coluna 4
-        // R    G    B       R    G    B       R    G    B       R    G    B       R    G    B
-        {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}}, // Linha 0
-        {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}}, // Linha 1
-        {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}}, // Linha 2
-        {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}}, // Linha 3
-        {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}}  // Linha 4
-    };
-
     Matriz_leds_config *frames[] = {&frame1, &frame2, &frame3, &frame4, &frame5, &frame6, &frame7, &frame8, &frame9, &frame10, &frame11};
 
     for(int i = 0; i < 11*3; i++){
@@ -570,7 +551,7 @@ void animation2(PIO pio, uint sm)
         sleep_ms(timeSeta);
     }
     sleep_ms(timeSeta);
-    imprimir_desenho(off, pio, sm);
+    desligaTodos(pio, sm);
 }
 
 void animacao5(PIO pio, uint sm){
@@ -794,20 +775,6 @@ void animacao5(PIO pio, uint sm){
          {1.0, 0.5, 0.0}}
     };
 
-    // Frame de Apagado
-    Matriz_leds_config off = {
-        // Linha 0
-        {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}},
-        // Linha 1
-        {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}},
-        // Linha 2
-        {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}},
-        // Linha 3
-        {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}},
-        // Linha 4
-        {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}}
-    };
-
     // Array de ponteiros para os 10 frames de carinhas
     Matriz_leds_config *frames[] = {
         &frame1, &frame2, &frame3, &frame4, &frame5,
@@ -821,7 +788,7 @@ void animacao5(PIO pio, uint sm){
     }
     sleep_ms(200);
     // Apaga todos os LEDs após a animação
-    imprimir_desenho(off, pio, sm);
+    desligaTodos(pio, sm);
 }
 
 void quadriculado(PIO pio, uint sm){
@@ -851,14 +818,6 @@ void quadriculado(PIO pio, uint sm){
         {{0.0, 0.0, 1.0}, {0.0, 1.0, 0.0}, {0.0, 0.0, 1.0}, {0.0, 1.0, 0.0}, {0.0, 0.0, 1.0}}  // Linha 4
     };
 
-    Matriz_leds_config off = {
-       {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}},
-       {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}},
-       {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}},
-       {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}},
-       {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}}
-   };
-
     Matriz_leds_config *frames[] = {&frame1, &frame2, &frame3};
 
     for(int i = 0; i < 3*10; i++){
@@ -866,7 +825,7 @@ void quadriculado(PIO pio, uint sm){
         sleep_ms(200);
     }
     sleep_ms(200);
-    imprimir_desenho(off, pio, sm);
+    desligaTodos(pio, sm);
 }
 
 void cobrinhaAnimation(PIO pio, uint sm)
@@ -995,14 +954,7 @@ void cobrinhaAnimation(PIO pio, uint sm)
         }
     }
 
-    Matriz_leds_config off = {
-        {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}}, // Linha 0
-        {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}}, // Linha 1
-        {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}}, // Linha 2
-        {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}}, // Linha 3
-        {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}}  // Linha 4
-    };
-    imprimir_desenho(off, pio, sm);
+    desligaTodos(pio, sm);
 }
 
 void animation3(PIO pio, uint sm) {
@@ -1062,14 +1014,6 @@ void animation3(PIO pio, uint sm) {
        {{1.0, 0.0, 1.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {1.0, 0.0, 1.0}}
    };
 
-   Matriz_leds_config off = {
-       {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}},
-       {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}},
-       {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}},
-       {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}},
-       {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}}
-   };
-
    Matriz_leds_config *frames[] = {&frame1, &frame2, &frame3, &frame4, &frame5, &frame6, &frame7};
 
    for(int i = 0; i < 7*5; i++) {
@@ -1077,7 +1021,7 @@ void animation3(PIO pio, uint sm) {
        sleep_ms(100);
    }
    sleep_ms(100);
-   imprimir_desenho(off, pio, sm);
+   desligaTodos(pio, sm); 
 }
 
 void animacao1(PIO pio, uint sm){
@@ -1122,14 +1066,6 @@ void animacao1(PIO pio, uint sm){
         {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 1.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}}  // Linha 4
     };
 
-    Matriz_leds_config off = {
-       {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}},
-       {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}},
-       {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}},
-       {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}},
-       {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}}
-   };
-
     Matriz_leds_config *frames[] = {&frame1, &frame2, &frame3, &frame4};
 
    for(int i = 0; i < 4*5; i++){
@@ -1138,7 +1074,7 @@ void animacao1(PIO pio, uint sm){
     }
 
     sleep_ms(200);
-    imprimir_desenho(off, pio, sm);
+    desligaTodos(pio, sm);
 }
 
 int main()
